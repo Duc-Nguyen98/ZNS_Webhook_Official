@@ -6,7 +6,7 @@ const { extractZaloData } = require('./utils/zalo');
 const { sendToTelegram } = require('./utils/telegram');
 
 const app = express();
-const port = 3001;
+const port = 3002;
 
 // Views / static
 app.set('view engine', 'ejs');
@@ -29,7 +29,7 @@ async function processQueue() {
 }
 
 // ===== Webhook Zalo =====
-app.post('/zalo-webhook', (req, res) => {
+app.post('/zns/zalo-webhook', (req, res) => {
   console.log('📥 Webhook nhận:', req.body);
 
   if (req.body.event_name === 'user_received_message') {
@@ -41,12 +41,22 @@ app.post('/zalo-webhook', (req, res) => {
   res.status(200).send('OK');
 });
 
+
+app.get('/u/:phone_hash',  async (req, res) => {
+  console.log('oke')
+  res.status(200).send('OK');
+
+})
+
+
 // Fallback
 app.use((req, res) => {
   res.status(200).render('coming_soon', {
     countdownDeadline: new Date('2025-08-28T23:59:59Z').toISOString()
   });
 });
+
+
 
 app.listen(port, () => {
   console.log(`✅ Server chạy tại http://localhost:${port}`);
