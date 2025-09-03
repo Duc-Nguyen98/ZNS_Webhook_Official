@@ -41,14 +41,6 @@ app.post('/zns/zalo-webhook', (req, res) => {
   res.status(200).send('OK');
 });
 
-
-app.get('/u/:phone_hash',  async (req, res) => {
-  console.log('oke')
-  res.status(200).send('OK');
-
-})
-
-
 // Fallback
 app.use((req, res) => {
   res.status(200).render('coming_soon', {
@@ -61,3 +53,7 @@ app.use((req, res) => {
 app.listen(port, () => {
   console.log(`✅ Server chạy tại http://localhost:${port}`);
 });
+
+
+
+//TEST https://tracking.nexgenvietnam.vn/zns/zalo-webhook
